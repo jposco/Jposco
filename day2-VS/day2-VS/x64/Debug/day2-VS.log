@@ -1,5 +1,2 @@
 ﻿  day2-VS.cpp
-C:\Users\gram\Desktop\Development\github\KDT_SF_2nd\day2-VS\day2-VS\day2-VS.cpp(16,18): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
-C:\Users\gram\Desktop\Development\github\KDT_SF_2nd\day2-VS\day2-VS\day2-VS.cpp(17,18): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
-C:\Users\gram\Desktop\Development\github\KDT_SF_2nd\day2-VS\day2-VS\day2-VS.cpp(35,12): error C2374: 'st1': 재정의. 여러 번 초기화했습니다.
-C:\Users\gram\Desktop\Development\github\KDT_SF_2nd\day2-VS\day2-VS\day2-VS.cpp(34,12): message : 'st1' 선언을 참조하십시오.
+  day2-VS.vcxproj -> C:\Users\gram\Desktop\Development\github\KDT_SF_2nd\day2-VS\x64\Debug\day2-VS.exe

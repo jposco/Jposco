@@ -7,7 +7,7 @@ int main()
     cout << "원하시는 숫자를 입력하세요.\n";
     cin >> num ;
     cout << "당신이 말씀하신 숫자는" << num << "입니다.\n";
-    */
+
 
     //기본자료형 - int, float
     int a = 1;
@@ -34,19 +34,137 @@ int main()
     string str1 = "name";
     cout << str1 << endl;
 
+    int a;
+    string b;
+    string c;
+
+    cin >> a;
+    cin >> b;
+    cin >> c;
+
+    cout << a << b << endl;
+    cout << b + c;
+
+   //실습1번
+    string stname;
+    cout << "신규회원 가입을 위해 고객님의 성함을 입력해주세요." << endl;
+    cin >> stname;
+    cout << "고객님의 성함은 " << stname << " 이시군요. " << endl;
+    cout << endl;
+
+    int age;
+    cout << "다음으로 나이를 입력해주세요." << endl;
+    cin >> age;
+    cout << "당신의 나이는 " << age << " 이군요. " << endl;
+    cout << endl;
+
+    cout << "신규회원이 되신 것을 축하드립니다." << stname << "님(" << age << "세)";
+    //생년월일 입력을 통해 만 나이로 적용하는 방법이 궁금해졌다.
+    */
+
+    //연산자
     /*
-    cout << "이름을 입력하세요.";
-        cin >> st1;*/
+//실습 2번
+    int age;
+    cout << "나이를 입력하세요. " << endl;
+    cin >> age;
+    if (0< age && age < 8) {
+        cout << "미취학아동" << endl;
+    }
+    else if (7 < age && age < 14) {
+        cout << "초등학생" << endl;
+    }
+    else if (13 < age && age < 17) {
+        cout << "중학생" << endl;
+    }
+    else if (16 < age && age < 20) {
+        cout << "고등학생" << endl;
+    }
+    else if (19 < age && age < 200) {
+        cout << "성인" << endl;
+    }
+    else {
+        cout << "나이가 너무 많습니다," << endl;
+    }
+    }
+    */
 
 
+    //if문
+    /*
+    int a = 5;
+    if (a < 10) {
+        cout << "a가 10보다 큽니다." << endl;
+    }
+    else if (a == 5) {
+        cout << "a는 5입니다," << endl;
+    }
+    else {
+        cout << "a는 10보다 크지 않고 5가 아닙니다." << endl;
+    }
+    */
+
+    /*
+        //실습3번
+    string name;
+    cout << "과제3번" << endl;
+        cout << "이름을 입력하세요." << endl;
+        cin >> name;
+
+        if (name == "홍길동") {
+            cout << "남자입니다." << endl;
+         }
+        else if(name == "성춘향") {
+            cout << "여자입니다." << endl;
+        }
+        else {
+            cout << "모르겠어요." << endl;
+        }
+    }
+    //string 연산자는 무조건 큰따옴표로 막아준다.
+    // if문 안에서의 =는 대입의 개념이 아닌 비교 개념으로써 ==로 써야한다.
 
 
+    //실습4번
 
+int num;
+cout << "< 실습4 >" << endl;
+cout << "숫자를 입력하세요." << endl;
+cin >> num;
+int a = num % 5;
+a == 0 ? cout << num << "는 5의 배수입니다." : cout << num << "는 5의 배수가 아니네욤.." << endl;
+*/
+
+cout << " -----< 과제5 >-----" << endl;
+string stname;
+cout << "신규회원 가입을 위해 고객님의 성함을 입력해주세요." << endl;
+cin >> stname;
+cout << "고객님의 성함은 " << stname << " 이시군요. " << endl;
+cout << endl;
+
+int age;
+cout << "다음으로 나이를 입력해주세요." << endl;
+cin >> age;
+cout << "당신의 나이는 " << age << " 이군요. " << endl;
+cout << endl;
+
+if (age < 20) {
+    cout << "성인의 경우에만 가입이 가능합니다." << endl;
+}
+else {
+    cout << stname <<  "신규 회원가입을 축하드립니다." << endl;
+}
+
+if {
+    if {
+        if{
 
 }
 
 
 
+
+}
 
 
 
