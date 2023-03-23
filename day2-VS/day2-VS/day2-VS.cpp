@@ -17,11 +17,14 @@ int main()
     float d = 0.4;
     cout << c << " - " << d << " = " << c + d << endl;
 
-    //기본자료형 - bool
+    //기본자료형 - bool???????
     bool c1 = true;
     cout << c1 << endl;
     bool c2 = false;
     cout << c2 << endl;
+
+
+
 
     //기본자료형 - char
     char f = 'f';
@@ -128,12 +131,11 @@ int main()
     //실습4번
 
 int num;
-cout << "< 실습4 >" << endl;
+cout << "-----< 실습4 >-----" << endl;
 cout << "숫자를 입력하세요." << endl;
 cin >> num;
 int a = num % 5;
 a == 0 ? cout << num << "는 5의 배수입니다." : cout << num << "는 5의 배수가 아니네욤.." << endl;
-*/
 
 cout << " -----< 과제5 >-----" << endl;
 string stname;
@@ -165,42 +167,42 @@ if {
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-    //참거짓을 쓸수있는 bool, 글자가 있다 없다로 나눈다. 무엇인가 들어있다면 참
-    bool bool123 = true;
-    //char 문자 1개 단위
-    char char123 = 'a';
-    //float 소수를 사용한다
-    float float123 = 0.1;
 */
+    cout << " 구구단게임을 해보자 " << endl;
+    cout << " 문제를 내주세요 (숫자입력해주세요)" << endl;
+    int a;
+    int b;
+    cin >> a;
+    cout << a << "와 곱해질 숫자 하나 더 입력 해주세요" << endl;
+    cin >> b;
+    cout << a <<" x "<< b << "결과 값은" << a * b << "입니다.";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
 // 프로그램 디버그: <F5> 키 또는 [디버그] > [디버깅 시작] 메뉴
