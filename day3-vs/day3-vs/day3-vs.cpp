@@ -33,46 +33,46 @@ for문( 초기값    조건문 증감문)
 	*/
 
 //while 응용하기
-//카페 키오스크 만들어보기
-	#include <iostream>
-
-	using namespace std;
-
-	int main()
-	{
-		cout << "-------------------------------------" << endl;
-		cout << "[    안녕하세요. 스타벅스입니다.    ]" << endl;
-		cout << "[    ▶  1. 아메리카노               ]" << endl;
-		cout << "[    ▶  2. 카페라떼                 ]" << endl;
-		cout << "[    ▶  3. 주문종료                 ]" << endl;
-		cout << "[    주문하실 번호를 선택해주세요.  ]" << endl;
-		cout << "-------------------------------------" << endl;
-
-
-		while (1) 
-		{
-			int order;
-			cin >> order;
-
-			if (order == 1) 
-			{
-				cout << "1. 아메리카노 주문하셨습니다."<<endl;
-			}
-			else if (order == 2) 
-			{
-				cout << "2. 카페라떼 주문하셨습니다." << endl;
-			}
-			else if (order == 3) 
-			{
-				cout << "3. 주문이 완료되었습니다." << endl;
-				break;
-			}
-			else 
-			{
-				cout << "1-3까지의 숫자만 입력해주세요." << endl;
-			}
-		}
-	}
+////카페 키오스크 만들어보기
+//	#include <iostream>
+//
+//	using namespace std;
+//
+//	int main()
+//	{
+//		cout << "-------------------------------------" << endl;
+//		cout << "[    안녕하세요. 스타벅스입니다.    ]" << endl;
+//		cout << "[    ▶  1. 아메리카노               ]" << endl;
+//		cout << "[    ▶  2. 카페라떼                 ]" << endl;
+//		cout << "[    ▶  3. 주문종료                 ]" << endl;
+//		cout << "[    주문하실 번호를 선택해주세요.  ]" << endl;
+//		cout << "-------------------------------------" << endl;
+//
+//
+//		while (1) 
+//		{
+//			int order;
+//			cin >> order;
+//
+//			if (order == 1) 
+//			{
+//				cout << "1. 아메리카노 주문하셨습니다."<<endl;
+//			}
+//			else if (order == 2) 
+//			{
+//				cout << "2. 카페라떼 주문하셨습니다." << endl;
+//			}
+//			else if (order == 3) 
+//			{
+//				cout << "3. 주문이 완료되었습니다." << endl;
+//				break;
+//			}
+//			else 
+//			{
+//				cout << "1-3까지의 숫자만 입력해주세요." << endl;
+//			}
+//		}
+//	}
 
 
 	/*
@@ -160,6 +160,10 @@ for문( 초기값    조건문 증감문)
 	//	while(1){
 	//		cout << "숫자를 입력하세요. (0 : 나가기) : ";
 	//		cin >> num;
+	//
+	//		while(num1 != 0){
+	//		j += num
+	// 
 	//
 	//		if(num != 0){		
 	//			j = j + num;
@@ -310,15 +314,15 @@ for문( 초기값    조건문 증감문)
 	//	}
 
 	//[번외] 실습 : 입력한 숫자만큼 별 찍기
-//int num;
-//cout << "숫자를 입력해주세요. : ";
-//cin >> num;
-//cout << endl << "output : " << endl;
-//for (int i = 1; i <= num; i++) {
-//	for (int j = num; j >= i; j--)
-//	{
-//		cout << "*";
-//
-//	}
-//	cout << endl;
-//}
+int num;
+cout << "숫자를 입력해주세요. : ";
+cin >> num;
+cout << endl << "output : " << endl;
+for (int i = 1; i <= num; i++) {
+	for (int j = num; j >= i; j--)
+	{
+		cout << "*";
+
+	}
+	cout << endl;
+}
