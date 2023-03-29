@@ -6,70 +6,76 @@ using namespace std;
 
 int main()
 {
-    string name, pin, num;
-    cout << "이름을 입력하세요 : ";
-    cin >> name;
-    cout << endl << "비밀번호를 입력하세요 : ";
-    cin >> pin;
+	ifstream member("실습2.txt");
+	string name, pin, name_in, pin_in;
 
-    ifstream file("실습2.txt"); // //file이란 변수에 실습2의 내용을 넣다
-    string line; //line = 홍길동호형호제 고길동둘리 아파트아파트
-    vector<string> v;
+	cout << "이름을 입력하세요 : ";
+	cin >> name;
+	cout << "비밀번호를 입력하세요 : ";
+	cin >> pin;
 
-    if (file.is_open()) {
-        while (getline(file, line))
-        {
-            v.push_back(line);//file에 있는 한 문장씩을 line 배열에 저장
-        }
-        //< 실습2.txt >
-        //[0] 홍길동호형호제
-        //[1] 고길동둘리
-        //[2] 아파트아파트
-        for (int i = 0; i < v.size(); i++) {
-        cout << v.at(i);
-    }
-        string sum = name + pin;
-        for (int i = 0; i < v.size(); i++) {
-            if (sum == v[i])
-            {//아디 비번 == 실습2.txt
-                cout << "로그인 성공" << endl;
-                cout << " 전화번호를 입력하세요. : ";
-                cin >> num;
-            }
-            else
-            {
-                cout << "로그인 실패" << endl;
-                break;
-            }
-            return 0;
-        }
-    }
-    file.close();
+	bool is_login = false;
 
-    ifstream file_v("member_tel.txt");
-    vector<string> v1;
-    string sum_v = name + num;
-    string line_v;
-    if (file_v.is_open()) {
-        while (getline(file_v, line_v)) {//getline(cin,ifstream), line이라는 변수에 저장)
-            v1.push_back(line_v);
-        }
-        for (int i = 0; i < v1.size(); i++)
-        {
-            if (v1[i] == sum_v)
-            {
-                v1[i] = sum_v;
-            }
-            else {
-                v1.push_back(sum_v);
-            }
-        }
+	if (member.is_open())
+	{
+		while (member >> name >> pin);
+		{
+			if(name_in == name&&pin_in==pin)
+			{
+				is_login = true;
+				break;
+			}
+		}
+	}
+	if (is_login) 
+	{
+		string num, num_in;
+		cout << "로그인성공" << endl;
+		cout << "전화번호를 입력하세요 :";
+		cin >> num;
 
-    }
-    file_v.close();
+	ifstream member_tel("member_tel.txt");
+	bool is_modify = false;
+	string namenum;
 
-    ofstream in("member_tel.txt");
-    for (int i = 0; i < v1.size(); i++) {
-        in << v1.at(i) << endl;
-    }
+	if (member_tel.is_open())
+	{
+		string namenum;
+		while (member_tel >> name >> num)
+		{			
+			if (name == name_in)//이름이 원래 있을 때 번호만 수정
+			{
+				namenum = name + num_in;
+				is_modify = true;
+			}
+			else                //이름이 없을 때 추가하기
+			{
+				namenum = name + num + "\n";
+			}		
+			member_tel.close();
+		}
+	}
+	
+	ofstream member_tel_write;
+
+	if (is_modify)
+	{
+		member_tel_write.open("member_tel.txt");
+		member_tel_write << namenum;
+	}
+	else
+	{
+		member_tel_write.open("member_tel.txt");
+
+
+
+
+
+
+
+
+
+
+
+
 }
