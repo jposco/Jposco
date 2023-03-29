@@ -1,0 +1,2 @@
+C:\Users\gram\Desktop\Development\github\KDT_SF_2nd\day5-vs\day6-sv\x64\Debug\day6-sv.exe
+C:\Users\gram\Desktop\Development\github\KDT_SF_2nd\day6-sv\x64\Debug\day6-sv.exe
