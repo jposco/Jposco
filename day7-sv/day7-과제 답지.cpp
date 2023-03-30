@@ -1,19 +1,19 @@
 #include <iostream>
 using namespace std;
 
-class Character {
-	string name;
+class Character { //클래스  Character 선언
+	string name; //name
 	int level = 0, item_num = 0;
 
-public:
-	Character(string name) {
-		this->name = name;
+public: //접근 제어자
+	Character(string name) { //생성자 (메소드)
+		this->name = name; //입력받은 name을 클래스 name에 집어넣는다.
 		cout << name << " 캐릭터가 생성 되었습니다.";
 	}
 
 	void setName(string name) {
-		this->name = name;
-		cout << "new name : " << this->name << endl;
+		this->name = name;//수정입력 받은 name을 클래스 name에 집어 넣는다
+		cout << "new name : " << this->name << endl;//출력도 클래스 name에서 받는다
 	}
 
 	void levelUp() {
