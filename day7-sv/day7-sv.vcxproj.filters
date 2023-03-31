@@ -15,19 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="day7-개념1.cpp">
+    <ClCompile Include="day7-class.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="day7-개념1-과제.cpp">
+    <ClCompile Include="day7-class-과제.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="day7-개념2.cpp">
+    <ClCompile Include="day7-project.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="day7-개념2-과제.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="day7-과제 답지.cpp">
+    <ClCompile Include="day7-과제3.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
