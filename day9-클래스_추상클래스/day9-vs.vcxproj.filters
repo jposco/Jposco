@@ -15,16 +15,28 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="day9-추상클래스.cpp">
+    <ClCompile Include="day9-1추상클래스.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="day9-추상클래스-과제.cpp">
+    <ClCompile Include="day9-1추상클래스-과제.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="day9-개념2.cpp">
+    <ClCompile Include="day9-2다형성.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="day9-개념2과제.cpp">
+    <ClCompile Include="day9-2다형성%28업캐스팅%29과제.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="day9-3업다운캐스팅.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="day9-4가상함수-과제.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="day9-4소멸자,가상함수.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="day9-review.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

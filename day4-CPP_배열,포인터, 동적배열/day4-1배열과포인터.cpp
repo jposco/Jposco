@@ -13,7 +13,7 @@ int main()
 	//	num = 0; // 변수의 초기화 
 	//	string str = "";
 	//
-	//	string fruit[] = { "apple","banana", "grape" };//3이라고 선언 가능
+	//	string fruit[3] = { "apple","banana", "grape" };//3이라고 선언 가능
 	//	//string fruit[] = { "apple","banana", "grape" };//비워두고 선언 가능 but인덱스는 지정
 	//	//선언 할 때 크기가 정해져야 함.
 	//	//int num[]도 가능

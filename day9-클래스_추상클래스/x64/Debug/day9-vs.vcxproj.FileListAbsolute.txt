@@ -1,1 +1,2 @@
 C:\Users\gram\Desktop\Development\github\KDT_SF_2nd\day9-vs\x64\Debug\day9-vs.exe
+C:\Users\gram\Desktop\Development\github\KDT_SF_2nd\day9-클래스_추상클래스\x64\Debug\day9-vs.exe
