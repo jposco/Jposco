@@ -27,7 +27,7 @@
     <ClCompile Include="day5-namespace 과제.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="day5-review.cpp">
+    <ClCompile Include="벡터총정리.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="적금은행 찾기3.cpp">
