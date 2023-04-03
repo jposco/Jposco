@@ -23,7 +23,7 @@ int main()
 //	for (int i = 0; i < 3; i++) {
 //		cout << i + 1 << "번째 회원 : ";
 //		string pin;
-//		getline(cin, pin);//cin 내용을 info이라는 변수에 저장)
+//		getline(cin, pin);//cin 내용을 pino이라는 변수에 저장)
 //
 //		if (member.is_open()) member << pin << endl;
 //		//member에다가 추가하여 정보를 입력한다.

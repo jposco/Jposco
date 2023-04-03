@@ -24,7 +24,7 @@
     <ClCompile Include="day10-3개념.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="day10-3개념과제.cpp">
+    <ClCompile Include="day10-시장에 가면.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

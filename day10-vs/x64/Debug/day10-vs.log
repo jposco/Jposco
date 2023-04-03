@@ -1,4 +1,2 @@
-﻿  day10-3개념과제.cpp
-C:\Users\gram\Desktop\Development\github\KDT_SF_2nd\day10-vs\day10-3개념과제.cpp(85,14): warning C4834: 'nodiscard' 특성이 포함된 함수의 반환 값을 버리는 중
-C:\Users\gram\Desktop\Development\github\KDT_SF_2nd\day10-vs\day10-3개념과제.cpp(102,17): error C2451: 'void' 형식의 조건식은 유효하지 않습니다.
-C:\Users\gram\Desktop\Development\github\KDT_SF_2nd\day10-vs\day10-3개념과제.cpp(102,17): message : void 형식의 식을 다른 형식으로 변환할 수 없습니다.
+﻿  day10-시장에 가면.cpp
+  day10-vs.vcxproj -> C:\Users\gram\Desktop\Development\github\KDT_SF_2nd\day10-vs\x64\Debug\day10-vs.exe
