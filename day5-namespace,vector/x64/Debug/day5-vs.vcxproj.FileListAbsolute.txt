@@ -1,3 +1,0 @@
-C:\Users\gram\Desktop\Development\github\KDT_SF_2nd\day5-vs\day5-vs\x64\Debug\day5-vs.exe
-C:\Users\gram\Desktop\Development\github\KDT_SF_2nd\day5-vs\x64\Debug\day5-vs.exe
-C:\Users\gram\Desktop\Development\github\KDT_SF_2nd\day5-namespace,vector\x64\Debug\day5-vs.exe
