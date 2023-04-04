@@ -45,5 +45,11 @@
     <ClCompile Include="[52]지나간 시간 알아내기time.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="[54]문자열 조회하기find.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="[55]문자열 길이 구하기length.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

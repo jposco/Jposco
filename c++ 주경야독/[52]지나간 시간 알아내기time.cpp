@@ -1,5 +1,5 @@
 #include <iostream>
-#include <ctime>//시간을 불러오는 인클루드
+#include <ctime> //시간을 불러오는 인클루드
 
 using namespace std;
 
@@ -21,9 +21,8 @@ int main()
 
 	time(&finish);
 
-	cout<<"1을 100억번 더하는 시간 : " <<difftime(finish, start)<<"h"
+	cout << "1을 100억번 더하는 시간 : " << difftime(finish, start) << "초\n";
 
-
-
+	return 0;
 }
 
