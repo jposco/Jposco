@@ -1,3 +1,2 @@
 ﻿  day11-프로젝트.cpp
-C:\Users\gram\Desktop\Development\github\KDT_SF_2nd\day11-난수생성\day11-프로젝트.cpp(28,34): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   day11-난수생성.vcxproj -> C:\Users\gram\Desktop\Development\github\KDT_SF_2nd\day11-난수생성\x64\Debug\day11-난수생성.exe

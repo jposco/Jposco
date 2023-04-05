@@ -1,55 +1,97 @@
 #include <iostream>
-#include<cstdlib>
+#include <cstdlib>
 #include <ctime>
-
+#include <vector>
 using namespace std;
 
 int main()
 {
-	string input, output; //입력값과 기존값
-	int timer = 0; //타이머
-	int count = 0; //성공횟수 class를 쓴다면 static으로!
-	string name_in; //휴먼의 닉네임
-	cout << "***************************************" << endl;
-	cout << " 30초간 끝말잇기 게임하기 " << endl;
-	cout << "▶휴먼의 닉네임을 입력하시오. : ";
-	cin >> name_in;
-	cout << "**************************************" << endl;
+	srand(static_cast<unsigned int>(time(NULL)));
+	vector<int> lottery;
+	vector<int> user;
+	int count = 0;
+	int num = 0, same = 0;
 
-	cout << "▶시작 제시어를 입력하세요 : ";
-	cin >> output;
-	cout << "▶게임 시작!! ";
+	cout << " -----------------------------------------------" << endl;
+	cout << "[  로또 1059회차 (2023.03.18) 당첨번호 확인하기 ]" << endl;
+	cout << "[  찍으신 복권 번호 7자리를 입력해주세요.       ]" << endl;
+	cout << " -----------------------------------------------" << endl;
 
-	clock_t startTime = clock(); //시작 시간
-
-	while (1)
+	while (count < 7)
 	{
-		
-		int output_size = output.size();
-		cout << output << endl;
+		num = (rand() % 45) + 1;
 
-		cout << "▶다음 단어를 입력하세요 : ";
-		cin >> input;
-
-		clock_t endTime = clock(); //종료 시간
-		int timer = (endTime - startTime) / CLOCKS_PER_SEC; //시간의 차
-
-		if (timer > 30)
+		for (int i = 0; i < count; i++)
 		{
-			cout << endl << "▶30초가 지났습니다 게임 종료!!" << endl;
-			cout << "총 입력한 단어 개수 : " << count << endl;
-			break;
+			if (num == lottery[i])
+			{
+				same = 1;
+				break;
+			}
 		}
-		else if (input[0] == output[output_size - 1])
+		if (same == 0)
 		{
-			output += " -> " + input;
+			lottery.push_back(num);
 			count++;
 		}
-		else
-		{
-			cout << "마지막 알파벳를 다시 확인해주세요. \n";
-		}
-		cout << "남은 시간 : " << 30-timer << endl << endl; //남은 시간 출력
 	}
-	return 0;
+
+	for (int elem : lottery)
+	{
+		cout << elem << " ";
+	}
+	cout << endl;
+
+	for (int i = 0; i < 7; i++)
+	{
+		int num_in=0;
+		cout << i+1 << "번째 숫자는 : ";
+		cin >> num_in; //7개의 숫자 선언
+		user.push_back(num_in);
+	}
+
+	int same_num = 0;
+	for (int i = 0; i < 7; i++)
+	{
+		for (int j = 0; j < 7; j++)
+		{
+			if (lottery[i] == user[j])
+			{
+				same_num++; //일치 할때마다 적립
+			}
+		}
+	}
+
+	switch (same_num)
+	{
+		case '7':
+		{
+			cout << "축하드립니다. 7개 번호 일치!!!!" << endl;
+			cout << "1등에 당첨 되셨습니다!!!!!!!!!!" << endl;;
+		}
+		case '6':
+		{
+			cout << "축하드립니다. 6개 번호 일치!!!!" << endl;
+			cout << "2등에 당첨 되셨습니다.!!!!!!!!!!" << endl;;
+		}
+		case '5':
+		{
+			cout << "축하드립니다. 5개 번호 일치!!!!" << endl;
+			cout << "3등에 당첨 되셨습니다.!!!!!!!!!!" << endl;;
+		}
+		case '4':
+		{
+			cout << "축하드립니다. 4개 번호 일치!!!!" << endl;
+			cout << "4등에 당첨 되셨습니다.!!!!!!!!!!" << endl;;
+		}
+		case '3':
+		{
+			cout << "축하드립니다. 3개 번호 일치!!!!" << endl;
+			cout << "5등에 당첨 되셨습니다.!!!!!!!!!!" << endl;;
+		}
+		default:
+		{
+			cout << "아쉽습니다.. 낙첨입니다." << endl;
+		}
+	}
 }
