@@ -18,19 +18,16 @@
     <ClCompile Include="day4-배열과포인터.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="day4-배열과포인터 과.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="day4-동적배.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="day4-동적배열 과제.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="복권번 확인 프로그램.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="day4-vs5.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="복권번호확인 프로그램.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="day4-배열과포인터 과제.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="day4-동적배열 개념.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

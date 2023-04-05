@@ -1,0 +1,2 @@
+C:\Users\gram\Desktop\Development\github\KDT_SF_2nd\day11-난수생성\x64\Debug\day11-난수생성.exe
+C:\Users\gram\Desktop\Development\github\KDT_SF_2nd\프로젝트\x64\Debug\프로젝트.exe
