@@ -41,3 +41,8 @@ int main()
 	//v4.clear();      //∫§≈Õ ¡¶∞≈.
 
 }
+
+for (auto elem : v) 
+{
+	cout << elem << endl;
+}
