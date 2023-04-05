@@ -15,13 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="day11-난수생성.cpp">
+    <ClCompile Include="복권번호 랜덤출력 프로그램">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="day11-프로젝트.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="난수생성 프로젝트.cpp">
+    <ClCompile Include="베스킨라빈스 서리원 게임.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="끝말잇기 게임.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
