@@ -1,124 +1,134 @@
-#include <iostream>
-#include <string>
+#include<iostream>
+#include<cstdlib>
+#include<ctime>
 
 using namespace std;
 
 int main()
 {
-	int num_in = 0;
-	cout << " 마방진의 행 혹은 열의 수를 자연수(홀수)로 입력해주세요. : ";
-	while (1)
-	{
-		cin >> num_in;
-		if (num_in % 2 == 1) { break; }
-		else cout << "홀수를 입력해주세요." << endl;
-	}
-
-	int** num_arr = new int* [num_in];
-	int center = num_in / 2;
-	int row = 0;	// 행
-	int col = 0;
-	int number = num_in * num_in; //마방진에 들어갈 숫자
-
-	for (int i = 0; i < num_in; i++)
-	{
-		num_arr[i] = new int[num_in];	// 각각의 행에 크기가 num인 배열을 할당
-	}
-	for (int k = 0; k < number; k++)
-	{
-		num_arr[row][col] = k;
-	}
 
 
 
 
-	for (int i = 0; i < num_in; i++)
-	{
-		for (int j = 0; j < num_in; j++)
-		{
-			cout << num_arr[i][j] << " ";
-		}
-		cout << endl;
-	}
-
-	for (int k = 0; k < num_in; k++)
-	{
-		delete[] num_arr[k];	// 안쪽 배열 해제
-	}
-	delete[] num_arr;	// 바깥 배열 해제
-
-	return 0;
-}
 
 
 
 
-//
-//#include<iostream>
-//#include<string>
-//
-//using namespace std;
-//// 마방진
-//int main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //{
-//	int num = 0;
+//	std::srand(time(NULL));
 //
-//	while (1)
+//	const int amount = 3;
+//	int com[amount] = {};
+//	int user[amount] = {};
+//	int count = 0, value_count = 0, place_count = 0, user_num = 0;
+//	bool dupli = false;
+//
+//	while (count < amount)
 //	{
-//		cout << "마방진의 행 혹은 열의 수를 자연수(홀수)로 입력해주세요 : ";
-//		cin >> num;
-//		cout << endl;
-//		if (num % 2 == 1)
+//		dupli = false;
+//		int num = std::rand() % 9 + 1;
+//		for (int i = 0; i < amount; i++)
+//		{
+//			if (com[i] == num)
+//			{
+//				dupli = true;	// 중복되는 숫자시 저장하지 않고 탈출
+//				break;
+//			}
+//		}
+//		if (!dupli)
+//		{
+//			com[count] = num;	// 숫자 저장
+//			count++;			// 몇개 저장했는지 카운트
+//		}
+//	}
+//
+//	/*
+//	cout << "컴퓨터의 번호 : ";
+//	for (int i = 0; i < amount; i++)
+//	{
+//		cout << com[i] << " ";	// 컴퓨터 번호 출력
+//	}
+//	cout << endl << endl;
+//	*/
+//	count = 0;
+//
+//	do
+//	{
+//		count++;
+//		cout << "1 ~ 9 사이의 숫자 3개를 입력 하시오. (이외의 숫자: 종료)" << endl << "입력한 수: ";
+//
+//		for (int i = 0; i < amount; i++)
+//		{
+//			cin >> user_num;
+//			user[i] = user_num;	// 입력 받은 수를 배열에 저장
+//			if (user_num > 9 || user_num < 1)
+//			{
+//				dupli = true;	// 1 ~ 9 범위를 벗어나면 종료
+//			}
+//		}
+//
+//		for (int j = 0; j < amount; j++)
+//		{
+//			if (com[j] == user[j])
+//			{
+//				place_count++;	// 자리와 숫자가 같을 때 카운트 (Ball)
+//			}
+//			for (int i = 0; i < amount; i++)
+//			{
+//				if (com[j] != user[j] && com[i] == user[j])
+//				{
+//					value_count++;	// 자리는 다르고 숫자만 같을 때 카운트 (Strike)
+//				}
+//			}
+//		}
+//
+//		cout << "Strike : " << place_count << "\t Ball : " << value_count << endl << endl;
+//
+//		if (place_count == 3)
+//		{
+//			cout << count << "번 만에 맞췄습니다." << endl;
 //			break;
-//	}
-//
-//	int** num_arr = new int* [num];		// 행의 크기가 num인 이차원 배열
-//	int center = num / 2;	// 첫번째 인덱스에 있는 숫자 1을 첫 행의 가운데에 위치하도록 함.
-//	int i = 0;	// 행
-//	int j = center;	// 열
-//
-//	for (int k = 0; k < num; k++)
-//	{// 각각의 index에 선언하고자 하는 배열의 크기만큼을 가리키게 한다.
-//		num_arr[k] = new int[num];		// 각각의 행에 크기가 num인 배열을 할당
-//	}
-//
-//	for (int k = 1; k <= num * num; k++)	// num * num 개 만큼의 원소 생성
-//	{
-//		num_arr[i][j] = k;	// k는 출력되는 숫자
-//		if (k % num == 0)	// k가 num과 같아지면 열을 아래로
+//		}
+//		else
 //		{
-//			i++;
+//			place_count = 0;
+//			value_count = 0;
 //		}
-//		else	// 아니라면 열은 한 칸 위로, 행은 옆으로
-//		{
-//			i--;
-//			j++;
-//		}
-//		if (i < 0)	// 열이 맨 위로 가면, 열을 가장 아래줄로 이동
-//		{
-//			i = num - 1;
-//		}
-//		if (j >= num)	// 행이 끝까지 이동하면 다시 첫번째 행으로 이동
-//		{
-//			j = 0;
-//		}
-//	}
-//
-//	for (int i = 0; i < num; i++)
-//	{
-//		for (int j = 0; j < num; j++)
-//		{// 출력
-//			cout << num_arr[i][j] << " ";
-//		}
-//		cout << endl;
-//	}
-//
-//	for (int k = 0; k < num; k++)
-//	{
-//		delete[] num_arr[k];	// 안쪽 배열 해제
-//	}
-//	delete[] num_arr;	// 바깥 배열 해제
+//	} while (dupli == false);
 //
 //	return 0;
-//}
-//[출처] C++Day14(마방진 만들기, 숫자야구 게임) | 작성자 1hyungjin1
+}
