@@ -2,12 +2,10 @@
 #include <vector>
 using namespace std;
 
-class Market
+class CMarket
 {
-	static int cnt; //몇 번 성공했는지 카운트
-	string name; //입력한 품목 이름
 public:
-	Market(string name_in)
+	CMarket(string name_in)
 	{
 		this->name = name_in;
 		cnt++; //입력 들어올 때 카운트
@@ -20,8 +18,11 @@ public:
 	{
 		return name;
 	}
+private :
+	static int cnt; //몇 번 성공했는지 카운트
+	string name; //입력한 품목 이름
 };
-int Market::cnt = 0;
+int CMarket::cnt = 0;
 
 int main()
 {
@@ -30,26 +31,28 @@ int main()
 	cout << "*************************************************" << endl;
 
 	string thing;
-	vector<Market> v;
+	vector<CMarket> v;
 	// vector<string> v;
 	// v = {"abc", "bcd"}
 	// v = {Market market("참돔")}
 	while (1)
 	{
 		cout << "시장에 가면 ~ ";
-		int flag = 1; //게임의 종료를 알리는 변수
+		bool flag = true; //게임의 종료를 알리는 변수
 		cin >> thing;
 		for (int i = 0; i < v.size(); i++)
 		{
 			if (thing != v.at(i).get_name())
 			{
-				flag = 0;
+				flag = false;
 				break;
 			}
 			cin >> thing; //입력한 내용이 같을 시 새로운 입력받기
 		}
 		if (!flag) { break; }
-		else { v.push_back(Market(thing)); }	
+		else { v.push_back(CMarket(thing)); }
 	}
-	cout << endl<< "시장에서 가져온 물건 갯수 : " << Market::get_cnt()<<"개 입니다.";
+	cout << endl << "시장에서 가져온 물건 갯수 : " << CMarket::get_cnt() << "개 입니다.";
+
+	return 0;
 }

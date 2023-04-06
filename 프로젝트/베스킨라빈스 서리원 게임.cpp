@@ -2,12 +2,14 @@
 #include <ctime>
 using namespace std;
 
-class Game
+class CGame
 {
+private:
 	string name;
-	int thirty_one = 0; 
+	int thirty_one = 0;
+	
 public:
-	Game(string name) //사용자 닉네임 입력
+	CGame(string name) //사용자 닉네임 입력
 	{
 		this->name = name;
 	}
@@ -42,10 +44,10 @@ public:
 		for (int i = 0; i < num_in; i++)
 		{
 			thirty_one++;
-			cout << thirty_one<< " ";
+			cout << thirty_one << " ";
 			if (thirty_one >= 31)
 			{
-				cout << endl<<"****▶"<< getName() << "(이)가 31이 되었습니다. AI 승리!****";
+				cout << endl << "****▶" << getName() << "(이)가 31이 되었습니다. AI 승리!****";
 				return -1;
 			}
 		}
@@ -64,7 +66,7 @@ public:
 			cout << thirty_one << " ";
 			if (thirty_one >= 31)
 			{
-				cout << endl<< "****▶AI가 31이 되었습니다. " << getName() << " 승리!****";
+				cout << endl << "****▶AI가 31이 되었습니다. " << getName() << " 승리!****";
 				return -1;
 			}
 		}
@@ -74,7 +76,6 @@ public:
 		cin >> next;
 		humun(next);
 	}
-
 	int random() //AI가 부를 랜덤숫자 생성
 	{
 		srand(time(NULL)); // 난수 생성하기
@@ -82,21 +83,39 @@ public:
 		return ran_num;
 	}
 
+	
+};
 
+class MainMenu {
+public:
+	MainMenu() {
+		cout << "\n\n\n\n";
+		cout << "\t\t"; cout << "@@@@@@@@       @        @@@@@@@@  @  @    @@@    @  \n";
+		cout << "\t\t"; cout << "       @     @ @              @   @  @   @   @   @  \n";
+		cout << "\t\t"; cout << "       @    @  @             @    @  @   @   @   @  \n";
+		cout << "\t\t"; cout << "@@@@@@@@       @            @  @@@@  @    @@@    @  \n";
+		cout << "\t\t"; cout << "       @       @           @      @  @     @@@@@@@  \n";
+		cout << "\t\t"; cout << "       @       @          @       @  @     @     @  \n";
+		cout << "\t\t"; cout << "@@@@@@@@    @@@@@@@      @        @  @     @@@@@@@  \n\n\n\n\n";
+		cout << "\t\t"; cout << "   게임을 시작하려면 아무키나 누르세요.\n\n\n\n\n\n\n";
+		getchar(); // 아무키 입력 기다림
+		system("cls"); // 콘솔 창 clear
+	}
 };
 
 int main()
 {
+	MainMenu();
 	string name_in; //사용자의 닉네임 입력값
 	int first_in = 0; //선공 후공 정해주는 입력값
 	int num_in = 0; //선공일 경우 입력값
 
-	cout << "***************************************" << endl;
-	cout << " AI와 베스킨라빈스 서리원 게임하기 " << endl;
+	cout << "*****************< AI vs humun >**********************" << endl;
+	//cout << " AI와 베스킨라빈스 서리원 게임하기 " << endl;
 	cout << "▶휴먼의 닉네임을 입력하시오. : ";
 	cin >> name_in;
-	cout << "**************************************" << endl;
-	Game g(name_in);
+	cout << "******************************************************" << endl;
+	CGame g(name_in);
 
 	cout << "▶1. 선공   ▶2. 후공 : ";
 	cin >> first_in;
