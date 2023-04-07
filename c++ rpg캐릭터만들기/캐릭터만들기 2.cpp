@@ -10,7 +10,7 @@ protected:
 	int exp = 0; //경험치
 	int offensive_power; //공격력
 	int full_HP; //최대체력 (직업비례)
-	int Current_HP; //현재체력
+	int Current_HP = full_HP; //현재체력
 public:
 	Character(string name, int offensive_power, int full_HP)
 	{
@@ -77,15 +77,15 @@ public:
 	}
 };
 
-class Weapon : public Character //무기별 공격력 및 체력 설정하기
+class Gunman : public Character //무기별 공격력 및 체력 설정하기
 {
+	int gunmanOffensive_power=30;
+	int gunmanFull_HP=100;
 public:
-	Weapon(string name, int offensive_power, int full_HP) : Character(name, offensive_power, full_HP)
+	Weapon(string name) : Character(name, gunmanOffensive_power, gunmanFull_HP)
 	{
 		this->name = name;
-		this->offensive_power = offensive_power;
-		this->full_HP = full_HP;
-		this->Current_HP = full_HP;
+		Current_HP = full_HP;
 	}
 };
 int main()
@@ -130,7 +130,7 @@ int main()
 			else { cout << "▶1-4 중에 선택해주세요"; }
 		}
 		cout << "*******************************************" << endl;
-		Character c1 = Weapon(name, attack, hp);
+		Character c1= Gunman(name);
 		cout << endl<< "< 다음 동작을 골라주세요. >" << endl;
 		cout << "▶1. Rename" << endl;
 		cout << "▶2. Attacking a Monster" << endl;
