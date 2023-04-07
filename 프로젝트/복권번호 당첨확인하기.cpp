@@ -6,92 +6,97 @@ using namespace std;
 
 int main()
 {
-	srand(static_cast<unsigned int>(time(NULL)));
-	vector<int> lottery;
-	vector<int> user;
-	int count = 0;
-	int num = 0, same = 0;
+	srand(time(NULL));
+	vector<int> lotteryNum; //복권 당첨번호 벡터
+	vector<int> userNum; //유저가 입력한 번호 벡터
+	int randNum = 0; //생성된 난수
+	int numIn = 0; //유저가 입력한 변수
+	int sameNum = 0; //두 벡터값 일치 변수
+	bool bonusNum = false; //보너스 숫자일치 확인용 BOOL
 
 	cout << " -----------------------------------------------" << endl;
-	cout << "[  로또 1059회차 (2023.03.18) 당첨번호 확인하기 ]" << endl;
-	cout << "[  찍으신 복권 번호 7자리를 입력해주세요.       ]" << endl;
+	cout << "[  로또 1062회차 (2023.04.08) 당첨번호 확인하기 ]" << endl;
+	cout << "[  찍으신 복권 번호 6자리를 입력해주세요.       ]" << endl;
 	cout << " -----------------------------------------------" << endl;
 
-	while (count < 7)
+	//로또 당첨번호 생성하기
+	for (int i = 0; i < 7; i++)
 	{
-		num = (rand() % 45) + 1;
-
-		for (int i = 0; i < count; i++)
+		bool flag = true; //난수 중복생성 방지용 BOOL
+		randNum = rand() % 45 + 1;
+		for (int j = 0; j < lotteryNum.size(); j++)
 		{
-			if (num == lottery[i])
+			if (randNum == lotteryNum.at(j))
 			{
-				same = 1;
+				flag = false; //중복된 난수 발생
 				break;
 			}
 		}
-		if (same == 0)
-		{
-			lottery.push_back(num);
-			count++;
-		}
+		if (!flag) { i--; } //중복된 난수는 재추첨
+		else { lotteryNum.push_back(randNum); }
 	}
 
-	for (int elem : lottery)
+	//로또 당첨번호 출력하기
+	cout << endl << "▶로또 1059회차 (2023.03.18) 당첨번호는 : ";
+	for (int i = 0; i < 6; i++)
 	{
-		cout << elem << " ";
+		cout << lotteryNum.at(i) << " ";
+	}
+	cout << "+ " << lotteryNum.at(6) << endl << endl;
+
+	//로또 선택번호 6개 입력하기
+	for (int i = 1; i <= 6; i++)
+	{
+		cout << "▷" << i << "번째 숫자는 : ";
+		cin >> numIn;
+		userNum.push_back(numIn);
 	}
 	cout << endl;
 
-	for (int i = 0; i < 7; i++)
+	//로또 당첨번호 비교하기
+	for (int i = 0; i < 6; i++)
 	{
-		int num_in = 0;
-		cout << i + 1 << "번째 숫자는 : ";
-		cin >> num_in; //7개의 숫자 선언
-		user.push_back(num_in);
-	}
-
-	int same_num = 0;
-	for (int i = 0; i < 7; i++)
-	{
-		for (int j = 0; j < 7; j++)
+		for (int j = 0; j < 6; j++)
 		{
-			if (lottery[i] == user[j])
+			if (lotteryNum[i] == userNum[j])
 			{
-				same_num++; //일치 할때마다 적립
+				sameNum++; //일치 할때마다 적립
 			}
 		}
 	}
+	
+	//로또 보너스번호 비교하기
+	for (int i = 0; i < 6; i++)
+	{
+		if (userNum[i] == lotteryNum.at(6))
+		{
+			bonusNum = true;
+			break;
+		}
+	}
 
-		switch (same_num)
+	//로또 당첨순위 출력하기
+	if (sameNum > 2)
+	{
+		if (sameNum == 5 && bonusNum)
 		{
-		case '7':
-		{
-			cout << "축하드립니다. 7개 번호 일치!!!!" << endl;
-			cout << "1등에 당첨 되셨습니다!!!!!!!!!!" << endl;;
+			cout << "▶축하드립니다. " << sameNum << "개번호 일치 + 보너스 번호 일치!!!!" << endl;
+			cout << "▶" << 2<< "등에 당첨되셨습니다!!" << endl;
 		}
-		case '6':
+
+		else if (sameNum && 5 || !bonusNum)
 		{
-			cout << "축하드립니다. 6개 번호 일치!!!!" << endl;
-			cout << "2등에 당첨 되셨습니다.!!!!!!!!!!" << endl;;
+			cout << "▶축하드립니다. " << sameNum << "개 번호 일치!!!!" << endl;
+			cout << "▶" << 3 << "등에 당첨되셨습니다!!" << endl;
 		}
-		case '5':
+		else
 		{
-			cout << "축하드립니다. 5개 번호 일치!!!!" << endl;
-			cout << "3등에 당첨 되셨습니다.!!!!!!!!!!" << endl;;
+			cout << "▶축하드립니다. " << sameNum << "개 번호 일치!!!!" << endl;
+			cout << "▶" << 7 - sameNum << "등에 당첨되셨습니다!!" << endl;
 		}
-		case '4':
-		{
-			cout << "축하드립니다. 4개 번호 일치!!!!" << endl;
-			cout << "4등에 당첨 되셨습니다.!!!!!!!!!!" << endl;;
-		}
-		case '3':
-		{
-			cout << "축하드립니다. 3개 번호 일치!!!!" << endl;
-			cout << "5등에 당첨 되셨습니다.!!!!!!!!!!" << endl;;
-		}
-		default:
-		{
-			cout << "아쉽습니다.. 낙첨입니다." << endl;
-		}
+	}
+	else
+	{
+		cout << "▶아쉽습니다. 낙첨입니다." << endl;
 	}
 }
