@@ -1,141 +1,260 @@
 ﻿#include <iostream>
-#include <cstdlib>
-#include <ctime>
-#include <vector>
-#include <string>
-#include <sstream>
 using namespace std;
 
-class Game //게임 클래스 선언
+class Weapon
 {
-private:
-	string name; //유저 닉네임 변수
-	vector<int> randNum; //output 벡터
-	static int count; //몇 번 도전했는지 카운트
+protected:
+	static int offensive_power; //공격력
+	static int full_HP; //최대체력 (직업비례)
+public:
+	Weapon(int offensive_power, int full_HP)
+	{
+		this->offensive_power = offensive_power;
+		this->full_HP = full_HP;
+	}
+	virtual void print() = 0;
+	static int getOffensive_power()
+	{
+		return offensive_power;
+	}
+	static int getFull_HP()
+	{
+		return full_HP;
+	}
+};
+
+class Gunner : public Weapon //무기별 공격력 및 체력 설정하기
+{
+	int offensive_power = 30;
+	int full_HP = 100;
+	
+public:
+	Gunner() :Weapon(30, 100)
+	{
+		this->offensive_power = offensive_power;
+		this->full_HP= full_HP;
+	}
+	void print()
+	{
+		cout << "--------------------------------------------------" << endl;
+		cout << "▶거너로 전직하셨습니다." << endl;
+		cout << "▶무기 : 리볼버, 공격력 : 30, 체력 : 100" << endl;
+		cout << "--------------------------------------------------" << endl;
+	}
+};
+
+class Gladiator : public Weapon //무기별 공격력 및 체력 설정하기
+{
+	int offensive_power = 20;
+	int full_HP = 150;
+	
+public:
+	Gladiator() :Weapon(20,150)
+	{
+		this->offensive_power = offensive_power;
+		this->full_HP = full_HP;
+	}
+		void print()
+		{
+			cout << "--------------------------------------------------" << endl;
+			cout << "▶검사로 전직하셨습니다." << endl;
+			cout << "▶무기 : 검, 공격력 : 20, 체력 : 150" << endl;
+			cout << "--------------------------------------------------" << endl;
+		}
+};
+class Wizard : public Weapon //무기별 공격력 및 체력 설정하기
+{
+	int offensive_power = 50;
+	int full_HP = 50;
+	
+public:
+	Wizard() :Weapon(50, 50)
+	{
+		this->offensive_power = offensive_power;
+		this->full_HP = full_HP;
+	}
+		void print()
+		{
+			cout << "--------------------------------------------------" << endl;
+			cout << "▶마법사로 전직하셨습니다." << endl;
+			cout << "▶무기 : 마법봉, 공격력 : 50, 체력 : 50" << endl;
+			cout << "--------------------------------------------------" << endl;
+		}	
+};
+
+class Character
+{
+protected:
+	string name;
+	int level = 1;
+	int monster_HP = 50;
+	int exp = 0;
+	int offensive_power = 0;
+	int full_HP = 0;
+	int current_HP = 0;
 
 public:
-	Game(string name) 
-	{ 
+	Character(string name)
+	{
 		this->name = name;
-		random();
+		this->offensive_power = Weapon::getOffensive_power();
+		this->full_HP = Weapon::getFull_HP();
+		this->current_HP = Weapon::getFull_HP();
 	}
-	static int getCnt() { return count; }
-
-	//strike 개수 출력 메소드
-	int matchStrike(vector<int> numbers)
+	void attack()
 	{
-		int strike = 0;
-		for (int i = 0; i < 3; i++)
+		cout << "▶몬스터를 공격했습니다. (공격력 : " << offensive_power << ")" << endl;
+		monster_HP -= offensive_power;
+		if (monster_HP <= 0)
 		{
-			if (numbers[i] == randNum[i]) { strike++; }
-		return strike;
-		}
-	}
-
-	//ball 개수 출력 메소드
-	int matchBall(vector<int> numbers)
-	{
-		int ball = 0;
-		for (int i = 0; i < 3; i++)
-		{
-			for (int j = 0; j < 3; j++)
+			exp += 100;
+			cout << "▶몬스터 처치!! (Exp : " << exp << "/200)" << endl;
+			if (exp >= 200)
 			{
-				if (numbers[i] != randNum[i]&& numbers[i] == randNum[j])
-				{
-					ball++;
-				}
+				level_up();
+				cout << "▶레벨 업! (현재 레벨 : " << level << " )" << endl;
+				exp = 0;
 			}
 		}
-		count++;
-		return ball;
-	}
-
-	//output 난수 생성 메소드
-	void random()
-	{
-		srand(time(NULL));
-		for (int i = 0; i < 3; i++)
+		else
 		{
-			bool flag = true; //난수 중복생성 방지용 BOOL
-			int num = (rand() % 9) + 1; //1-9까지의 난수 생성
-			for (int j = 0; j < randNum.size(); j++)
-			{
-				if (num == randNum.at(j))
-				{
-					flag = false; //중복된 난수 발생
-					break;
-				}
-			}
-			if (!flag) { i--; } //중복된 난수는 재추첨
-			else { randNum.push_back(num); }
+			cout << "▶몬스터 체력 (" << monster_HP << "/50)" << endl;
+			current_HP -= 10;
+			cout << "▶몬스터에게 공격 당했습니다. (HP:" << current_HP << "/" << full_HP << ")" << endl;
 		}
-
-		//결과 확인용 난수 출력부
-		cout << "(결과 확인용 난수 출력 : ";
-		for (int elem : randNum) { cout << elem << " "; }
-		cout << ")"<<endl;
+	}
+	void HP_potion()
+	{
+		if (current_HP == full_HP) { cout << "▶체력이 꽉 찼습니다." << endl; }
+		else if (current_HP > full_HP - 20)
+		{
+			current_HP = full_HP;// +20보다 작은 +10도 회복될 수 있도록,
+			cout << "▶HP가 회복되었습니다. (현재 HP : " << current_HP << ")" << endl;
+		}
+		else
+		{
+			current_HP += 20;
+			cout << "▶HP가 회복되었습니다. (현재 HP : " << current_HP << ")" << endl;
+		}
+	}
+	void setName(string name) //setter를 이용한 이름 변경하기
+	{
+		this->name = name;
+		cout << "▶모험가 이름이 " << this->name << "(으)로 변경되었습니다." << endl;
+	}
+	void level_up()
+	{
+		level++;
+		cout << "▶Level Up!! -> 공격력 +10 (레벨 : " << level << ")" << endl;
+		offensive_power += 10;
+		exp = 0;//경험치 초기화
+	}
+	void information()
+	{
+		cout << "이름 : " << name << endl;
+		cout << "레벨 : " << level << endl;
+		cout << "공격력 : " << offensive_power << endl;
+		cout << "체력 : " << current_HP << endl;
+		cout << "경험치 : " << exp << endl;
 	}
 };
 
-int Game::count = 0;
+int Weapon::offensive_power = 0;
+int Weapon::full_HP = 0;
 
-//시작화면 출력부
-class MainMenu
+void creatJob(int job, string name)
 {
-public:
-	MainMenu()
+	switch (job)
 	{
-		cout << "\n\n\n\n";
-		cout << "\t\t"; cout << "@@@@@@@@        @        @@@@@@   @@@@@@@@     @@@@@@@@        @       @        @        \n";
-		cout << "\t\t"; cout << "@       @      @ @      @         @            @       @      @ @      @        @        \n";
-		cout << "\t\t"; cout << "@       @     @   @     @         @            @       @     @   @     @        @        \n";
-		cout << "\t\t"; cout << "@@@@@@@@     @@@@@@@     @@@@@@   @@@@@@@@     @@@@@@@@     @@@@@@@    @        @        \n";
-		cout << "\t\t"; cout << "@       @   @       @          @  @            @       @   @       @   @        @        \n";
-		cout << "\t\t"; cout << "@       @  @         @         @  @            @       @  @         @  @        @        \n";
-		cout << "\t\t"; cout << "@@@@@@@@  @           @  @@@@@@   @@@@@@@@     @@@@@@@@  @           @ @@@@@@@  @@@@@@@@ \n\n\n\n\n";
-		cout << "\t\t"; cout << " \t\t  게임을 시작하려면 아무키나 누르세요.\n\n\n\n\n\n\n";
-		getchar();// 아무키 입력 기다림
-		system("cls"); // 콘솔 창 clear
+	case 1:
+	{
+		Weapon* w1 = new Gunner();
+		w1->print();
+		delete w1;
+		break;
 	}
-};
+	case 2:
+	{
+		Weapon* w2 = new Gladiator();
+		w2->print();
+		delete w2;
+		break;
+	}
+	case 3:
+	{
+		Weapon* w3 = new Wizard();
+		w3->print();
+		delete w3;
+		break;
+	}
+	}
+}
 
 int main()
 {
-	//메인화면 출력부
-	MainMenu();
+	string name;
+	int job;
 
-	//이름 입력부
-	string nameIn; //사용자의 닉네임 입력값
-	int numIn;
-	cout << "*****************< 숫자 야구 게임 >**********************" << endl;
-	cout << "▶휴먼의 닉네임을 입력하시오. : ";
-	cin >> nameIn;
-	cout << "*********************************************************" << endl;
-	Game g(nameIn); //클래스 실행과 동시에 난수 생성
-
-	//게임 실행부
 	while (1)
 	{
-		vector<int> numbers;
-		cout << "▶1 - 9 사이의 숫자 3개를 입력하시오.(이외의 숫자 : 게임종료)" << endl;
-		cout << "▶숫자입력 : ";
-		for (int i = 0; i < 3; i++)
+		cout << "*******************************************" << endl;
+		cout << "Q. 모험가의 이름을 입력해주세요 : ";
+		cin >> name;
+		cout << endl << "▶1. 거너 (공격력 : 30, 체력 : 100)" << endl;
+		cout << "▶2. 검사 (공격력 : 20, 체력 : 150)" << endl;
+		cout << "▶3. 마법사 (공격력 : 50, 체력 : 50)" << endl;
+		cout << "▶0 : 게임종료" << endl;
+		cout << "Q. 직업을 선택해주세요.";
+		while (1)
 		{
-			cin >> numIn;
-			if (numIn < 1 && numIn>9)
+			cin >> job;
+			if (job> 0 && job < 4)
 			{
-				cout << "▶게임 종료 되었습니다." << endl;
+				system("cls"); // 콘솔 창 clear
+				creatJob(job, name);
 				break;
 			}
-			numbers.push_back(numIn);
+			cout << "1 - 3 중에 선택해주세요." ;
 		}
-		if (g.matchStrike(numbers) == 3)
+
+		cout << "*******************************************" << endl;
+		cout << endl << "< 다음 동작을 골라주세요. >" << endl;
+		cout << "▶1. Rename" << endl;
+		cout << "▶2. Attacking a Monster" << endl;
+		cout << "▶3. Level up" << endl;
+		cout << "▶4. HP Recovery" << endl;
+		cout << "▶5. Information" << endl << endl;
+		Character c(name);
+		while (1)
 		{
-			cout << "\n▶게임승리!! 총 " << Game::getCnt() << "회만에 성공하셨습니다." << endl;
-			break;
+			int motion_in;
+			cout << "Q. 어떤 동작을 실행하시겠습니까? (0:종료) : ";
+			cin >> motion_in;			
+			switch (motion_in)
+			{
+			case 0:
+				cout << "▶게임종료" << endl;
+				return 0;
+			case 1:
+				cout << "Q. 새로운 모험가의 닉네임을 입력해주세요 : ";
+				cin >> name;
+				c.setName(name);
+				break;
+			case 2:
+				c.attack();
+				break;
+			case 3:
+				c.level_up();
+				break;
+			case 4:
+				c.HP_potion();
+				break;
+			case 5:
+				c.information();
+				break;
+			default:
+				cout << "▶0~4 중에서 골라주세요. " << endl;
+			}
 		}
-		cout << "▶Strike : " << g.matchStrike(numbers) << "\t▶Ball : " << g.matchBall(numbers) << endl;
 	}
-	
-	return 0;
 }
