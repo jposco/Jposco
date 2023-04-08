@@ -1,14 +1,13 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include <vector>
 using namespace std;
 
 int main()
 {
 	srand(time(NULL));
-	vector<int> lotteryNum; //복권 당첨번호 벡터
-	vector<int> userNum; //유저가 입력한 번호 벡터
+	int lotteryNum[7] = {}; //복권 당첨번호 벡터
+	int userNum[6] = {}; //유저가 입력한 번호 벡터
 	int randNum = 0; //생성된 난수
 	int numIn = 0; //유저가 입력한 변수
 	int sameNum = 0; //두 벡터값 일치 변수
@@ -24,32 +23,32 @@ int main()
 	{
 		bool flag = true; //난수 중복생성 방지용 BOOL
 		randNum = rand() % 45 + 1;
-		for (int j = 0; j < lotteryNum.size(); j++)
+		for (int j = 0; j < 7; j++)
 		{
-			if (randNum == lotteryNum.at(j))
+			if (randNum == lotteryNum[j])
 			{
 				flag = false; //중복된 난수 발생
 				break;
 			}
 		}
 		if (!flag) { i--; } //중복된 난수는 재추첨
-		else { lotteryNum.push_back(randNum); }
+		else { lotteryNum[i] = randNum; }
 	}
 
 	//로또 당첨번호 출력하기
 	cout << endl << "▶로또 1059회차 (2023.03.18) 당첨번호는 : ";
 	for (int i = 0; i < 6; i++)
 	{
-		cout << lotteryNum.at(i) << " ";
+		cout << lotteryNum[i] << " ";
 	}
-	cout << "+ " << lotteryNum.at(6) << endl << endl;
+	cout << "+ " << lotteryNum[6] << endl << endl;
 
 	//로또 선택번호 6개 입력하기
-	for (int i = 1; i <= 6; i++)
+	for (int i = 0; i < 6; i++)
 	{
-		cout << "▷" << i << "번째 숫자는 : ";
+		cout << "▷" << i + 1 << "번째 숫자는 : ";
 		cin >> numIn;
-		userNum.push_back(numIn);
+		userNum[i] = numIn;
 	}
 	cout << endl;
 
@@ -64,11 +63,11 @@ int main()
 			}
 		}
 	}
-	
+
 	//로또 보너스번호 비교하기
 	for (int i = 0; i < 6; i++)
 	{
-		if (userNum[i] == lotteryNum.at(6))
+		if (userNum[i] == lotteryNum[6])
 		{
 			bonusNum = true;
 			break;
@@ -81,7 +80,7 @@ int main()
 		if (sameNum == 5 && bonusNum)
 		{
 			cout << "▶축하드립니다. " << sameNum << "개번호 일치 + 보너스 번호 일치!!!!" << endl;
-			cout << "▶" << 2<< "등에 당첨되셨습니다!!" << endl;
+			cout << "▶" << 2 << "등에 당첨되셨습니다!!" << endl;
 		}
 		else if (sameNum && 5 || !bonusNum)
 		{

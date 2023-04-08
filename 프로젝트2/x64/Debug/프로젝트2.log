@@ -1,2 +1,5 @@
-﻿  프로젝트2.cpp
-  프로젝트2.vcxproj -> C:\Users\gram\Desktop\Development\github\KDT_SF_2nd\프로젝트2\x64\Debug\프로젝트2.exe
+﻿  캐릭터 만들기 답지.cpp
+C:\Users\gram\Desktop\Development\github\KDT_SF_2nd\프로젝트2\캐릭터 만들기 답지.cpp(119,20): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  프로젝트2.cpp
+  코드를 생성하고 있습니다...
+C:\Users\gram\Desktop\Development\github\KDT_SF_2nd\프로젝트2\프로젝트2.cpp(186): error C4703: 초기화되지 않았을 수 있는 로컬 포인터 변수 'j'이(가) 사용되었습니다.

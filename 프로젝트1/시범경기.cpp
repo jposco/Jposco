@@ -1,144 +1,100 @@
 #include <iostream>
+#include <cstdlib>
 #include <ctime>
-#include <string>
 using namespace std;
 
-class Calculator
-{
-protected:
-	static double resultNum;
-	virtual void cal() {};
-public:
-	void cal() {
-		cout << "--------------------------------------------------" << endl;
-		cout << "▶결과 : " << resultNum << endl;
-		cout << "--------------------------------------------------" << endl;
-	}
-};
-
-class Plus : public Calculator {
-	double x = 0;
-	double y = 0;
-public:
-	Plus(double x, double y) :Calculator()
-	{
-		this->resultNum = x + y;
-		Calculator::cal();
-	}
-};
-
-class Minus : public Calculator {
-	double x = 0;
-	double y = 0;
-public:
-	Minus(double x, double y) :Calculator()
-	{
-		this->resultNum = x - y;
-		Calculator::cal();
-	}
-};
-
-class Multi : public Calculator {
-	double x = 0;
-	double y = 0;
-public:
-	Multi(double x, double y) :Calculator()
-	{
-		this->resultNum = x * y;
-		Calculator::cal();
-	}
-};
-
-class Division : public Calculator {
-	double x = 0;
-	double y = 0;
-public:
-	Division(double x, double y) :Calculator()
-	{
-		this->resultNum = x / y;
-		Calculator::cal();
-	}
-};
-
-double Calculator::resultNum = 0;
-
-void function(double x, char oper, double y)
-{
-	switch (oper) {
-	case '+': {
-		Calculator* cal = new Plus(x, y);	
-		delete cal;
-		break;
-	}
-	case '-': {
-		Calculator* cal = new Minus(x, y);
-		delete cal;
-		break;
-	}
-	case '/': {
-		Calculator* cal = new Division(x, y);
-		delete cal;
-		break;
-	}
-	case '*': {
-		Calculator* cal = new Multi(x, y);
-		delete cal;
-		break;
-	}
-	default:
-		cout << "+ , - , / , * 연산자를 입력해주세요." << endl;
-		break;
-	}
 int main()
 {
-	double x = 0, y = 0;
-	char operator;
+	srand(time(NULL));
+	int lotteryNum[7] = {}; //복권 당첨번호 벡터
+	int userNum[6] = {}; //유저가 입력한 번호 벡터
+	int randNum = 0; //생성된 난수
+	int numIn = 0; //유저가 입력한 변수
+	int sameNum = 0; //두 벡터값 일치 변수
+	bool bonusNum = false; //보너스 숫자일치 확인용 bool
 
-	cout << "숫자를 입력하세요   : ";
-	cin >> x;
-	while (1)
+	cout << " -----------------------------------------------" << endl;
+	cout << "[  로또 1062회차 (2023.04.08) 당첨번호 확인하기 ]" << endl;
+	cout << "[  찍으신 복권 번호 6자리를 입력해주세요.       ]" << endl;
+	cout << " -----------------------------------------------" << endl;
+
+	//로또 당첨번호 생성하기
+	for (int i = 0; i <7; i++)
 	{
-		cout << "연산자를 입력하세요 : ";
-		cin >> operator;
-		cout << "숫자를 입력하세요   : ";
-		cin >> y;
-
-		switch (operator)
+		bool flag = true; //난수 중복생성 방지용 BOOL
+		randNum = rand() % 45 + 1;
+		for (int j = 0; j <7; j++)
 		{
-		case '+':
-			c.Plus(x, y);
-			break;
-		case '-':
-			c.Minus(x, y);
-			break;
-		case '*' :
-			c.Multi(x, y);
-			break;
-		case '/':
-			c.Division(x, y);
-			break;
-		default:
-			cout << "연산자를 잘못 입력하셨습니다." << endl;
+			if (randNum == lotteryNum[j])
+			{
+				flag = false; //중복된 난수 발생
+				break;
+			}
 		}
-		cout << "--------------------------------------\n";
-		cout << "▶결과 : " << c.getResult() << endl;
-		cout << "--------------------------------------\n";
+		if (!flag) { i--; } //중복된 난수는 재추첨
+		else { lotteryNum[i] = randNum; }
+	}
 
-		char continue_pro;
-		cout << "연산을 계속 진행하시겠습니까? (Y=계속, I:초기화,E:종료) : ";
-		cin >> continue_pro;
-		switch (continue_pro)
+	//로또 당첨번호 출력하기
+	cout << endl << "▶로또 1059회차 (2023.03.18) 당첨번호는 : ";
+	for (int i = 0; i < 6; i++)
+	{
+		cout << lotteryNum[i] << " ";
+	}
+	cout << "+ " << lotteryNum[6] << endl << endl;
+
+	//로또 선택번호 6개 입력하기
+	for (int i = 0; i < 6; i++)
+	{
+		cout << "▷" << i+1 << "번째 숫자는 : ";
+		cin >> numIn;
+		userNum[i] = numIn;
+	}
+	cout << endl;
+
+	//로또 당첨번호 비교하기
+	for (int i = 0; i < 6; i++)
+	{
+		for (int j = 0; j < 6; j++)
 		{
-		case 'Y':
-			x = c.getResult();
-			break;
-		case 'I':
-			x = 0;
-			break;
-		case 'E':
-			return -1;
+			if (lotteryNum[i] == userNum[j])
+			{
+				sameNum++; //일치 할때마다 적립
+			}
 		}
 	}
 
-	return 0;
+	//로또 보너스번호 비교하기
+	for (int i = 0; i < 6; i++)
+	{
+		if (userNum[i] == lotteryNum[6])
+		{
+			bonusNum = true;
+			break;
+		}
+	}
+
+	//로또 당첨순위 출력하기
+	if (sameNum > 2)
+	{
+		if (sameNum == 5 && bonusNum)
+		{
+			cout << "▶축하드립니다. " << sameNum << "개번호 일치 + 보너스 번호 일치!!!!" << endl;
+			cout << "▶" << 2 << "등에 당첨되셨습니다!!" << endl;
+		}
+		else if (sameNum && 5 || !bonusNum)
+		{
+			cout << "▶축하드립니다. " << sameNum << "개 번호 일치!!!!" << endl;
+			cout << "▶" << 3 << "등에 당첨되셨습니다!!" << endl;
+		}
+		else
+		{
+			cout << "▶축하드립니다. " << sameNum << "개 번호 일치!!!!" << endl;
+			cout << "▶" << 7 - sameNum << "등에 당첨되셨습니다!!" << endl;
+		}
+	}
+	else
+	{
+		cout << "▶아쉽습니다. 낙첨입니다." << endl;
+	}
 }
