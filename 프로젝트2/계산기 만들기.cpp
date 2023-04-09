@@ -1,5 +1,4 @@
-#include <iostream>
-using namespace std;
+
 
 //--------------포인터 변수 선언과 출력 복습하기--------------------------------------------------------
 //포인터 : 메모리의 주소를 가진 변수
@@ -39,6 +38,9 @@ using namespace std;
 	//p3->test_stu(); //불가능 :  자식클래스
 	//delete p3; //동적메모리 해제를 해줘야한다.
 
+#include <iostream>
+
+using namespace std;
 
 class Calculator
 {

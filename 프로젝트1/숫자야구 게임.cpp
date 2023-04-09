@@ -1,9 +1,6 @@
 #include <iostream>
-#include <cstdlib>
 #include <ctime>
 #include <vector>
-#include <string>
-#include <sstream>
 using namespace std;
 
 class Game //게임 클래스 선언
