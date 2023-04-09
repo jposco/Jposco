@@ -36,13 +36,11 @@ int main()
 			row--;
 			col++;
 		}
-		if (row < 0)
-			//행이 맨위(row < 0)를 넘었을경우 맨 밑(num_in - 1)으로 이동
+		if (row < 0) //행이 맨위(row < 0)를 넘었을경우 맨 밑(num_in - 1)으로 이동
 		{
 			row = num_in - 1;
 		}
-		if (col >= num_in)
-			//열이 맨 마지막 (col >= num_in)을 넘었다면 맨 앞으로(col = 0) 이동
+		if (col >= num_in) //열이 맨 마지막 (col >= num_in)을 넘었다면 맨 앞으로(col = 0) 이동
 		{
 			col = 0;
 		}
