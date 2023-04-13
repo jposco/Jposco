@@ -1,4 +1,5 @@
 #include <iostream>
+
 using namespace std;
 
 class Character //객체 상태와 동작을 가진다.
@@ -109,7 +110,7 @@ public:    //접근 제어자 (상태의 개념)
 				cout << "▶게임 종료" << endl;
 				return -1;
 			}
-			else if (motion_in == 1)h
+			else if (motion_in == 1)
 			{
 				cout << "▶새로운 모험가의 닉네임을 입력해주세요 : ";
 				cin >> name;
