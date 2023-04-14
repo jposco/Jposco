@@ -8,8 +8,8 @@ int main()
 	int num_in = 0;
 	cout << " 마방진의 행 혹은 열의 수를 자연수(홀수)로 입력해주세요. : ";
 	while (1)
-	{
-		cin >> num_in;
+	{ 
+		cin >> num_in;  
 		if (num_in % 2 == 1) { break; }
 		else cout << "홀수를 입력해주세요." << endl;
 	}
