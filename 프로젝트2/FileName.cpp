@@ -2,7 +2,7 @@
 #include <ctime>
 
 using namespace std;
-
+ 
 //메인화면 출력부
 void startScreen()
 {
