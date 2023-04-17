@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream> //파일을 읽고, 쓸 수 있도록 관련 기능을 제공하는 헤더
-#include <vector>
+//#include <vector>
 using namespace std;
 
 int main()
