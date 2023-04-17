@@ -13,8 +13,8 @@ public:
 		this->offensive_power = offensive_power;
 		this->full_HP = full_HP;
 	}
-	virtual void print() = 0;
-	static int getOffensive_power()
+	virtual void print() = 0; 
+	static int getOffensive_power() 
 	{
 		return offensive_power;
 	}
