@@ -11,7 +11,7 @@ private:
 public:
 	Game(string name) //사용자 닉네임 입력
 	{
-		this->name = name;
+		this->name = name; 
 	}
 	string getName() //이름 출력값
 	{
