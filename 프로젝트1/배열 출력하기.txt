@@ -1,4 +1,4 @@
-< 배열 출력하기 >
+< 배열 출력하기 > 
 for (int elem : lottery)
 {
 		cout<< elem << " ";
