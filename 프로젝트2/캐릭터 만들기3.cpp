@@ -8,7 +8,7 @@ protected:
 	static int offensive_power; //공격력
 	static int full_HP; //최대체력 (직업비례)
 public:
-	Job(int offensive_power, int full_HP)
+	Job(int offensive_power, int full_HP) 
 	{
 		this->offensive_power = offensive_power;
 		this->full_HP = full_HP;
