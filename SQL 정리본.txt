@@ -19,17 +19,17 @@ USE poscol;
 -테이블 생성
 DROP TABLE IF EXISTS user;
 CREATE TABLE user (
-id VARCER(10) NOT NULL PRIMARY KEY,
+id VARCHER(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 name VARCHAR(10) NOT NULL,
 addr VARCHAR(20) NOT NULL,
 phone INT );
 
 -참조키 생성
-CRATE TABLE orders (
+CREATE TABLE orders (
 orderid INT NOT NULL PRIMARY KEY,
 userid VARCHAR(10) NOT NULL,
 prodname VARCHAR(20), 
-foreigh key(userid) references user(id) );
+foreign key(userid) references user(id) );
 
 -새로운 열(속성) 추가
 ALTER TABLE user ADD gender CHAR(1);
@@ -53,7 +53,7 @@ SELECT * FROM user;
 
 -튜플 삽입 명령어
 INSERT INTO user VALUES
-('posco','정제철','영등포')
+('posco','정제철','영등포'),
 ('godeok','제처루','제물포');
 
 -튜플 삭제 명령어
@@ -155,3 +155,6 @@ SELECT a.author_id,b.title
 FROM authors a
 RIGHT JOIN books b
 ON a.author_id = b.author_id;
+
+UPDATE authors SET author_id =4
+WHERE last_name = 'king';
