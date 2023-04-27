@@ -1,0 +1,46 @@
+< 배열 출력하기 > 
+for (int elem : lottery)
+{
+		cout<< elem << " ";
+}
+
+< 배열 vs 배열 중복체크 > 
+int ball = 0;
+		for (int i = 0; i < 3; i++)
+		{
+			for (int j = 0; j < 3; j++)
+			{
+				if (numbers[i] != randNum[i] && numbers[i] == randNum[j])
+				{
+					ball++;
+				}
+			}
+		}
+
+< 난수 생성 후 중복체크까지 >
+void random()
+	{
+		srand(time(NULL));
+		for (int i = 0; i < 3; i++)
+		{
+			bool flag = true; //난수 중복생성 방지용 BOOL
+			int num = (rand() % 9) + 1; //1-9까지의 난수 생성
+			for (int j = 0; j < randNum.size(); j++)
+			{
+				if (num == randNum.at(j))
+				{
+					flag = false; //중복된 난수 발생
+					break;
+				}
+			}
+			if (!flag) { i--; } //중복된 난수는 재추첨
+			else { randNum.push_back(num); }
+		}
+	}
+};
+
+< 스태틱 함수 사용하기 >
+	static int count;
+	static int getCnt() { return count; }
+	int Game::count = 0;
+	출력:Game::getCnt()
