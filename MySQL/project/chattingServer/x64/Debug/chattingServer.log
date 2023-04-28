@@ -1,2 +1,10 @@
-﻿  Server.cpp
-  chattingServer.vcxproj -> C:\Users\gram\Desktop\Development\github\KDT_SF_2nd\MySQL\project\x64\Debug\ChattingServer.exe
+﻿Server.obj : error LNK2005: "void __cdecl add_client(void)" (?add_client@@YAXXZ)이(가) AloneSever.obj에 이미 정의되어 있습니다.
+Server.obj : error LNK2005: "void __cdecl del_client(int)" (?del_client@@YAXH@Z)이(가) AloneSever.obj에 이미 정의되어 있습니다.
+Server.obj : error LNK2005: "void __cdecl recv_msg(int)" (?recv_msg@@YAXH@Z)이(가) AloneSever.obj에 이미 정의되어 있습니다.
+Server.obj : error LNK2005: "void __cdecl send_msg(char const *)" (?send_msg@@YAXPEBD@Z)이(가) AloneSever.obj에 이미 정의되어 있습니다.
+Server.obj : error LNK2005: "void __cdecl server_init(void)" (?server_init@@YAXXZ)이(가) AloneSever.obj에 이미 정의되어 있습니다.
+Server.obj : error LNK2005: main이(가) AloneSever.obj에 이미 정의되어 있습니다.
+Server.obj : error LNK2005: "int client_count" (?client_count@@3HA)이(가) AloneSever.obj에 이미 정의되어 있습니다.
+Server.obj : error LNK2005: "class std::vector<struct SOCKET_INFO,class std::allocator<struct SOCKET_INFO> > sck_list" (?sck_list@@3V?$vector@USOCKET_INFO@@V?$allocator@USOCKET_INFO@@@std@@@std@@A)이(가) AloneSever.obj에 이미 정의되어 있습니다.
+Server.obj : error LNK2005: "struct SOCKET_INFO server_sock" (?server_sock@@3USOCKET_INFO@@A)이(가) AloneSever.obj에 이미 정의되어 있습니다.
+C:\Users\gram\Desktop\Development\github\KDT_SF_2nd\MySQL\project\x64\Debug\ChattingServer.exe : fatal error LNK1169: 여러 번 정의된 기호가 있습니다.

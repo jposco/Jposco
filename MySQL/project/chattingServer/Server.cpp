@@ -9,7 +9,11 @@
 #define MAX_SIZE 1024 //상수 선언
 #define MAX_CLIENT 3 //최대 인원 3
 
-using namespace std;
+using std::cout;
+using std::cin;
+using std::endl;
+using std::string;
+using std::vector;
 
 struct SOCKET_INFO { //구조체 정의
     SOCKET sck; //ctrl + 클릭, unsigned int pointer형
@@ -56,7 +60,14 @@ int main() {
             msg = server_sock.user + " : " + buf;
             send_msg(msg.c_str());
         }
-
+        /* 이 코드는 C++ 프로그래밍 언어를 사용하여 클라이언트에서 입력한 문자열을 서버로 전송하는 무한 루프를 구현합니다.
+            while문은 항상 참(true)이므로, 루프가 끝나지 않고 계속 실행됩니다.
+            std::getline(cin, text)는 사용자가 키보드로 입력한 문자열을 읽어들이는 함수입니다.            
+            getline() 함수는 한 줄씩 문자열을 읽어들입니다.읽어들인 문자열은 text 변수에 저장됩니다.
+            const char* buf = text.c_str()는 string 객체인 text의 내용을 C 스타일의 문자열로 변환하여 buf 포인터 변수에 저장합니다.
+            msg = server_sock.user + " : " + buf; 는 서버의 user 이름과 사용자가 입력한 문자열을 합쳐서 새로운 문자열 msg를 생성합니다.
+            send_msg(msg.c_str())는 생성된 문자열 msg를 서버로 전송하는 함수입니다.c_str() 함수는 문자열을 C 스타일의 문자열로 변환하여 전송합니다.
+            즉, 이 코드는 사용자가 입력한 문자열을 서버로 전송하는 무한 루프를 구현하는 코드입니다.*/
         for (int i = 0; i < MAX_CLIENT; i++) {
             th1[i].join();
         }
@@ -72,7 +83,8 @@ int main() {
     return 0;
 }
 
-void server_init() {
+void server_init() //서버측 소켓 활성화
+{
 
     server_sock.sck = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
     //서버 소켓을 특정할 수 있는 int형 숫자를 담음.
@@ -99,7 +111,7 @@ void add_client() {
     //그 소켓의 주소를 담을 변수 => addr이다.
     SOCKADDR_IN addr = {};
     int addrsize = sizeof(addr);
-    char buf[MAX_SIZE] = { }; //메시지의 최대길이를 설정해준다.
+    char buf[MAX_SIZE] = { }; //메시지의 최대길이를 설정해준다. 1024
 
     ZeroMemory(&addr, addrsize); //addr을 0x00으로 초기화
 
@@ -107,6 +119,7 @@ void add_client() {
     //sck, user : 클라이언트의 소켓 정보를 저장, 밑에서 sck_list에 추가함.
     
     new_client.sck = accept(server_sock.sck, (sockaddr*)&addr, &addrsize);
+    //소켓 주소, 주소의 길이
     //클라이언트 수만큼 accept실행 connect()
     recv(new_client.sck, buf, MAX_SIZE, 0); //클라이언트 connect(), send()
     //클라이언트 측에서 바로 user 이름을 담아서 send를 함. recv()로 받기 위해
@@ -114,6 +127,7 @@ void add_client() {
     //user는 char형으로 들어오기 때문에 string형으로 형변환 해줘서 저장.
 
     string msg = "[공지] " + new_client.user + " 님이 입장했습니다.";
+    //정제철(제주삼다수)님이 입장했습니다.
     cout << msg << endl;
     sck_list.push_back(new_client); //sck_list에 추가함.
     //[ {1234, jechul}, { 1234, jechul }, { 1234, jechul } ]
@@ -124,7 +138,7 @@ void add_client() {
     client_count++;
 
     cout << "[공지] 현재 접속자 수 : " << client_count << "명" << endl;
-    //누가 들어왔는지 공지하기 위해 send메시지 한다.
+    //참여자 : 윤소라, 정제철
     send_msg(msg.c_str());
 
     th.join();
