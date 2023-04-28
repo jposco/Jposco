@@ -42,7 +42,7 @@ int main()
     stmt->execute("DROP TABLE IF EXISTS inventory"); // DROP
     cout << "Finished dropping table (if existed)" << endl;
     stmt->execute("CREATE TABLE inventory (id serial PRIMARY KEY, name VARCHAR(50), quantity INTEGER);"); // CREATE
-    //serial 1씩 늘어나는거
+    //serial 1씩 늘어나는거 
     cout << "Finished creating table" << endl;
     delete stmt;
 
