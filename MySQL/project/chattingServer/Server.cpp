@@ -15,6 +15,11 @@ using std::endl;
 using std::string;
 using std::vector;
 
+//MySQL
+const string server = "tcp://127.0.0.1:3306"; // 데이터베이스 주소
+const string username = "root"; // 데이터베이스 사용자
+const string password = "07wd2713"; // 데이터베이스 접속 비밀번호
+
 struct SOCKET_INFO { //구조체 정의
     SOCKET sck; //ctrl + 클릭, unsigned int pointer형
     string user; //user  : 사람의 이름

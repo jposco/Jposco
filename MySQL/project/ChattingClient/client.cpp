@@ -6,6 +6,7 @@
 #include <sstream>
 #include <iostream>
 #include <thread>
+#include <mysql/jdbc.h>
 
 #define MAX_SIZE 1024
 
