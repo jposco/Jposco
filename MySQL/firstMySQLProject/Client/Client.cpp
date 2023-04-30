@@ -7,6 +7,7 @@
 #include <iostream>
 #include <thread>
 #include <mysql/jdbc.h>
+#include <conio.h> 
 
 using std::cout;
 using std::cin;
@@ -58,6 +59,7 @@ void mainMenu()
 
 class SQL
 {
+private:
     string id, pw, name, phone, status, inBirth, song = "";
 public:
     SQL()
@@ -85,7 +87,15 @@ public:
         cin >> id;
         this->id = id;
         cout << "pw";
-        cin >> pw;
+        char ch = ' ';
+        while (ch != 13) { // Enter 키를 누르면 입력 종료
+            ch = getch();
+            if (ch == 13) break; // Enter 키를 누르면 입력 종료
+            pw.push_back(ch);
+            cout << '*'; // 별표로 대체하여 출력
+        }
+        cout << endl;
+
         cout << "name";
         cin >> name;
         cout << "phone";
@@ -144,7 +154,6 @@ public:
         pstmt->executeQuery();
         printf("Status updated\n");
     }
-
     void updateSong()
     {
         cout << "song";
@@ -155,7 +164,6 @@ public:
         pstmt->executeQuery();
         printf("Song updated\n");
     }
-
     void friends()
     {
         pstmt = con->prepareStatement("SELECT name, status, song, birth, phone FROM user WHERE id != ?;");
@@ -203,7 +211,21 @@ public:
             cout << "이름 : " << result->getString("name") << endl;
             cout << "생일 : " << result->getString("birth") << endl;
         }
-
+    }
+    void modifyPw()
+    {
+        pstmt = con->prepareStatement("UPDATE user SET pw = ? WHERE id = ?");
+        pstmt->setInt(1, 200);
+        pstmt->setString(2, id);
+        pstmt->executeQuery();
+        printf("Row updated\n");
+    }
+    void deleteUser()
+    {
+        pstmt = con->prepareStatement("DELETE FROM user WHERE id = ?");
+        pstmt->setString(1, id);
+        result = pstmt->executeQuery();
+        printf("Row deleted\n");
     }
 };
 
@@ -239,7 +261,8 @@ int main()
 //    sql.updateStatus();
 //    sql.updateSong();
 //    sql.friends();
-      sql.searchBirth();
+      //sql.searchBirth();
+      sql.deleteUser();
 
 
 
@@ -309,3 +332,21 @@ int main()
 //delete pstmt;
 //delete con;
 //system("pause");
+
+
+
+//<getch함수>
+//사용자가 입력한 키보드 문자를 즉시 가져오는 함수입니다.
+//이 함수는 키를 누르면 바로 그 값을 반환하며, 입력받은 키를 화면에 출력하지 않습니다.
+//비밀번호와 같은 보안성이 필요한 정보를 입력받을 때 사용하면 유용합니다
+//ch 변수에 13을 대입한 이유는, 13은 Enter 키를 나타내기 때문입니다.
+//while 문은 Enter 키를 누르기 전까지 계속해서 사용자의 입력을 받습니다.
+//getch() 함수는 콘솔에서 사용자가 입력한 값을 읽어들입니다.
+//사용자가 Enter 키를 누르면, while 문이 종료됩니다.
+//
+//비밀번호 입력 시, 입력된 문자열을 별표로 대체하기 위해,
+//입력된 문자열을 pw 변수에 push_back() 함수로 저장합니다.
+//push_back() 함수는 문자열의 맨 뒤에 문자를 추가합니다.
+//
+//그리고, cout << '' 를 통해, 입력된 문자열을 별표()로 대체하여 출력합니다.
+//이렇게 되면, 사용자가 입력한 비밀번호는 별표로 대체되어 보안성이 높아집니다.

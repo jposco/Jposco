@@ -278,9 +278,6 @@ void del_client(int idx) {
 //pstmt = con->prepareStatement("SELECT * FROM inventory;");
 //result = pstmt->executeQuery();
 
-//while (result->next())
-//    printf("Reading from table=(%d, %s, %d)\n", result->getInt(1), result->getString(2).c_str(), result->getInt(3));
-
 ////update
 //pstmt = con->prepareStatement("UPDATE inventory SET quantity = ? WHERE name = ?");
 //pstmt->setInt(1, 200);
