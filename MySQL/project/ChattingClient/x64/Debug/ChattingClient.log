@@ -1,1 +1,4 @@
-﻿  ChattingClient.vcxproj -> C:\Users\gram\Desktop\Development\github\KDT_SF_2nd\MySQL\project\x64\Debug\ChattingClient.exe
+﻿  client.cpp
+C:\Users\gram\Desktop\Development\github\KDT_SF_2nd\MySQL\project\ChattingClient\client.cpp(64,71): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\gram\Desktop\Development\github\KDT_SF_2nd\MySQL\project\ChattingClient\client.cpp(76,56): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  ChattingClient.vcxproj -> C:\Users\gram\Desktop\Development\github\KDT_SF_2nd\MySQL\project\x64\Debug\ChattingClient.exe

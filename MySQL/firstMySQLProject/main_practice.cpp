@@ -20,20 +20,23 @@ const string server = "tcp://127.0.0.1:3306"; // 데이터베이스 주소
 const string username = "root"; // 데이터베이스 사용자
 const string password = "07wd2713"; // 데이터베이스 접속 비밀번호
 
-sql::Statement* stmt;
-
-
 
 struct SOCKET_INFO { //구조체 정의
-    SOCKET sck; //ctrl + 클릭, unsigned int pointer형
-    string user; //user  : 사람의 이름
+    SOCKET sck=0; //ctrl + 클릭, unsigned int pointer형
+    string user =""; //user  : 사람의 이름
 };
 
 vector<SOCKET_INFO> sck_list; //서버에 연결된 client를 저장할 변수.
 SOCKET_INFO server_sock; //서브소켓의 정보를 저장할 정보.
 int client_count = 0; //현재 접속된 클라이언트 수 카운트 용도.
 
-void creatTable();
+//SQL
+void startSql(); //SQL실행 - creatTable;
+
+//시스템구동
+void mainMenu();
+
+//채팅
 void server_init(); //서버용 소켓을 만드는 함수
 void add_client(); //accept 함수 실행되고 있을 예정
 void send_msg(const char* msg); //send() 실행
@@ -42,37 +45,10 @@ void del_client(int idx); //클라이언트와의 연결을 끊을 때
 
 int main()
 {
+    startSql();
+
     WSADATA wsa;
     int code = WSAStartup(MAKEWORD(2, 2), &wsa);
-
-    // MySQL Connector/C++ 초기화-------------------------------------------------------------------|
-    sql::mysql::MySQL_Driver* driver; // 추후 해제하지 않아도 Connector/C++가 자동으로 해제해 줌  //|
-    sql::Connection* con;                                                                         //|
-    sql::PreparedStatement* pstmt;                                                                //|
-    sql::ResultSet* result;                                                                       //|
-                                                                                                  //|
-    try {                                                                                         //|
-        driver = sql::mysql::get_mysql_driver_instance();                                         //|
-        con = driver->connect(server, username, password);                                        //|
-    }                                                                                             //|
-    catch (sql::SQLException& e) {                                                                //|
-        cout << "Could not connect to server. Error message: " << e.what() << endl;               //|
-        exit(1);                                                                                  //|
-    }                                                                                             //|
-                                                                                                  //|
-    // 데이터베이스 선택                                                                          //|
-    con->setSchema("project1");                                                                   //|
-                                                                                                  //|
-    // DB 한글 저장을 위한 셋팅                                                                   //|
-    stmt = con->createStatement();                                                                //|
-    stmt->execute("set names euckr");                                                             //|
-    if (stmt) { delete stmt; stmt = nullptr; }                                                    //|
-                                                                                                  //|
-    // 데이터베이스 쿼리 실행                                                                     //|
-    stmt = con->createStatement();                                                                //|
-    //stmt->execute("DROP TABLE IF EXISTS inventory"); // DROP                                    //|
-    //cout << "Finished dropping table (if existed)" << endl;                                     //|
-    //----------------------------------------------------------------------------------------------|
 
     if (!code) {
         server_init();
@@ -110,36 +86,85 @@ int main()
     return 0;
 }
 
-void creatTable()
+void startSql()
 {
-    //CREAT
-    stmt->execute("CREATE TABLE user\
-        (id VARCHAR(50) NOT NULL PRIMARY KEY,\
-        pw VARCHAR(50) NOT NULL,\
-        name VARCHAR(10) NOT NULL,\
-        phone INT NOT NULL,\
-        status VARCHAR(50),\
-        birth DATE NOT NULL,\
-        song VARCHAR(50));");
-    cout << "Finished creating user table" << endl;
+      // MySQL Connector/C++ 초기화
+    sql::mysql::MySQL_Driver* driver; // 추후 해제하지 않아도 Connector/C++가 자동으로 해제해 줌 
+    sql::Connection* con;                                                                        
+    sql::PreparedStatement* pstmt;                                                               
+    sql::ResultSet* result;  
+    sql::Statement* stmt;
 
-    stmt->execute("CREATE TABLE chatting (\
-        sequence INT NOT NULL PRIMARY KEY AUTO_INCREMENT,\
-        chatname VARCHAR(10) NOT NULL,\
-        time TIMESTAMP NOT NULL,\
-        send VARCHAR(1024),\
-        recv VARCHAR(1024),\
-        chat_id VARCHAR(50) NOT NULL,\
-        foreign key(chat_id) references user(id)\
-        ON UPDATE CASCADE ON DELETE CASCADE);");
-    cout << "Finished creating chatting table" << endl;
+    try {                                                                                        
+        driver = sql::mysql::get_mysql_driver_instance();                               
+        con = driver->connect(server, username, password);                              
+    }                                                                                   
+    catch (sql::SQLException& e) {                                                      
+        cout << "Could not connect to server. Error message: " << e.what() << endl;     
+        exit(1);                                                                        
+    }                                                                                   
+                                                                                        
+    // 데이터베이스 선택                                                                
+    con->setSchema("project1");                                                         
 
-    delete stmt;
+    // DB 한글 저장을 위한 셋팅                                                             
+    stmt = con->createStatement();                                                      
+    stmt->execute("set names euckr");                                                   
+    if (stmt) { delete stmt; stmt = nullptr; }                                          
+
+    //// 데이터베이스 쿼리 실행                                                               
+    //stmt = con->createStatement();                                                      
+    ////stmt->execute("DROP TABLE IF EXISTS inventory"); // DROP                  
+    ////cout << "Finished dropping table (if existed)" << endl;
+    ////CREAT
+    //stmt->execute("CREATE TABLE user\
+    //    (id VARCHAR(50) NOT NULL PRIMARY KEY,\
+    //    pw VARCHAR(50) NOT NULL,\
+    //    name VARCHAR(10) NOT NULL,\
+    //    phone INT NOT NULL,\
+    //    status VARCHAR(50),\
+    //    birth DATE NOT NULL,\
+    //    song VARCHAR(50));");
+    //cout << "Finished creating user table" << endl;
+
+    //stmt->execute("CREATE TABLE chatting (\
+    //    sequence INT NOT NULL PRIMARY KEY AUTO_INCREMENT,\
+    //    chatname VARCHAR(10) NOT NULL,\
+    //    time TIMESTAMP NOT NULL,\
+    //    send VARCHAR(1024),\
+    //    recv VARCHAR(1024),\
+    //    chat_id VARCHAR(50) NOT NULL,\
+    //    foreign key(chat_id) references user(id)\
+    //    ON UPDATE CASCADE ON DELETE CASCADE);");
+    //cout << "Finished creating chatting table" << endl;
+
+    //delete stmt;
+}
+
+void mainMenu()
+{
+    cout << "\n\n";
+    cout << "\t"; cout << "********************************** \n";
+    cout << "\t"; cout << "*                                * \n";
+    cout << "\t"; cout << "*  *******    *     *     *  *   * \n";
+    cout << "\t"; cout << "*     *      * *    *     * *    * \n";
+    cout << "\t"; cout << "*     *     *****   *     **     * \n";
+    cout << "\t"; cout << "*     *    *     *  *     * *    * \n";
+    cout << "\t"; cout << "*     *   *       * ***** *  *   * \n";
+    cout << "\t"; cout << "*                                * \n";
+    cout << "\t"; cout << "*                                * \n";
+    cout << "\t"; cout << "*                                * \n";
+    cout << "\t"; cout << "*                                * \n";
+    cout << "\t"; cout << "*            SERVER ON           * \n";
+    cout << "\t"; cout << "*                                * \n";
+    cout << "\t"; cout << "*                                * \n";
+    cout << "\t"; cout << "*                                * \n";
+    cout << "\t"; cout << "*                                * \n";
+    cout << "\t"; cout << "********************************** \n\n";
 }
 
 void server_init() //서버측 소켓 활성화
 {
-
     server_sock.sck = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
     //서버 소켓을 특정할 수 있는 int형 숫자를 담음.
     //server_sock의 sck -> SOCKET_INFO sck, user
@@ -156,8 +181,7 @@ void server_init() //서버측 소켓 활성화
     listen(server_sock.sck, SOMAXCONN);
 
     server_sock.user = "server";
-
-    cout << "Server On" << endl;
+    mainMenu();
 }
 
 void add_client() {
@@ -274,4 +298,4 @@ void del_client(int idx) {
 //delete result;
 //delete pstmt;
 //delete con;
-system("pause");
+//system("pause");
