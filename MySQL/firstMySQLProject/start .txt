@@ -6,7 +6,7 @@
 3. PW 찾기
 	-`ID, name, phone, birth
 4. 회원가입
-	-`ID(노중복), PW, name, phone, birth
+	-`ID(노중복), PW, name, phone, birth 
 
 < main >
 정제철님이 로그인했습니다.
