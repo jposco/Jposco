@@ -60,7 +60,7 @@ void mainMenu()
 class SQL
 {
 private:
-    string id, pw, name, phone, status, inBirth, song = "";
+    string id, pw, name, phone, status, birth, song = "";
 public:
     SQL()
     {
@@ -89,10 +89,18 @@ public:
         cout << "pw";
         char ch = ' ';
         while (ch != 13) { // Enter 키를 누르면 입력 종료
-            ch = getch();
+            ch = _getch();
             if (ch == 13) break; // Enter 키를 누르면 입력 종료
-            pw.push_back(ch);
-            cout << '*'; // 별표로 대체하여 출력
+            if (ch == 8) { // Backspace 키인 경우
+                if (!pw.empty()) { // 입력된 문자가 있으면
+                    pw.pop_back(); // 마지막 문자를 삭제
+                    cout << "\b \b"; // 커서 위치를 왼쪽으로 이동시켜 공백을 출력한 뒤, 다시 커서 위치를 원래대로 이동시킴
+                }
+            }
+            else {
+                pw.push_back(ch);
+                cout << '*'; // 별표로 대체하여 출력
+            }
         }
         cout << endl;
 
@@ -101,11 +109,11 @@ public:
         cout << "phone";
         cin >> phone;
         cout << "birth 8자리입력";
-        cin >> inBirth;
+        cin >> birth;
 
-        string year = inBirth.substr(0, 4);
-        string month = inBirth.substr(4, 2);
-        string day = inBirth.substr(6, 2);
+        string year = birth.substr(0, 4);
+        string month = birth.substr(4, 2);
+        string day = birth.substr(6, 2);
         string DATE = year + "-" + month + "-" + day;
 
         pstmt = con->prepareStatement("INSERT INTO user(id, pw, name, phone, birth) VALUE(?, ?, ?, ?, ?)");
@@ -125,23 +133,23 @@ public:
 
         while (result->next())
         {
-                cout << "이름 : " << result->getString("name") << endl;
-                // status 값이 NULL인 경우 "없음"으로 출력
-                if (result->wasNull()) {
-                    cout << "상메 : 없음" << endl;
-                }
-                else {
-                    cout << "상메 : " << result->getString("status") << endl;
-                }
-                // song 값이 NULL인 경우 "없음"으로 출력
-                if (result->wasNull()) {
-                    cout << "음악 : 없음" << endl;
-                }
-                else {
-                    cout << "음악 : " << result->getString("song") << endl;
-                }
-                cout << "생일 : " << result->getString("birth") << endl;
-                cout << "번호 : " << result->getString("phone") << endl;            
+            cout << "이름 : " << result->getString("name") << endl;
+            // status 값이 NULL인 경우 "없음"으로 출력
+            if (result->wasNull()) {
+                cout << "상메 : 없음" << endl;
+            }
+            else {
+                cout << "상메 : " << result->getString("status") << endl;
+            }
+            // song 값이 NULL인 경우 "없음"으로 출력
+            if (result->wasNull()) {
+                cout << "음악 : 없음" << endl;
+            }
+            else {
+                cout << "음악 : " << result->getString("song") << endl;
+            }
+            cout << "생일 : " << result->getString("birth") << endl;
+            cout << "번호 : " << result->getString("phone") << endl;
         }
     }
     void updateStatus()
@@ -214,11 +222,41 @@ public:
     }
     void modifyPw()
     {
-        pstmt = con->prepareStatement("UPDATE user SET pw = ? WHERE id = ?");
-        pstmt->setInt(1, 200);
-        pstmt->setString(2, id);
-        pstmt->executeQuery();
-        printf("Row updated\n");
+        cout << "기존 pw";
+        string in_pw = "";
+        string new_pw = "";
+        char ch = ' ';
+        while (ch != 13) { // Enter 키를 누르면 입력 종료
+            ch = _getch();
+            if (ch == 13) break; // Enter 키를 누르면 입력 종료
+            in_pw.push_back(ch);
+            cout << '*'; // 별표로 대체하여 출력
+        }
+        cout << endl;
+
+        pstmt = con->prepareStatement("SELECT pw FROM user WHERE ?");
+        pstmt->setString(1, id);
+        result = pstmt->executeQuery();
+        if (result->next())
+        { // 쿼리 결과가 있다면
+            string db_pw = result->getString(1); // 데이터베이스에서 가져온 pw
+            if (db_pw == in_pw)
+            {
+                cout << "new_pw";
+                char ch = ' ';
+                while (ch != 13) { // Enter 키를 누르면 입력 종료
+                    ch = _getch();
+                    if (ch == 13) break; // Enter 키를 누르면 입력 종료
+                    new_pw.push_back(ch);
+                    cout << '*'; // 별표로 대체하여 출력
+                }
+                pstmt = con->prepareStatement("UPDATE user SET pw = ? WHERE id = ?");
+                pstmt->setString(1, new_pw);
+                pstmt->setString(2, id);
+                pstmt->executeQuery();
+                printf("New PW updated\n");
+            }
+        }
     }
     void deleteUser()
     {
@@ -256,13 +294,14 @@ int main()
     mainMenu();
     SQL sql;
     sql.crateUser();
-//    //system("cls");
-//    sql.myProfile();
-//    sql.updateStatus();
-//    sql.updateSong();
-//    sql.friends();
-      //sql.searchBirth();
-      sql.deleteUser();
+    //system("cls");
+    //sql.myProfile();
+    //sql.updateStatus();
+    //sql.updateSong();
+    //sql.friends();
+    //sql.searchBirth();
+    sql.modifyPw(); //비번 변경
+    sql.deleteUser(); //회원 탈퇴
 
 
 
